@@ -10,7 +10,9 @@ const dummyContacts = [
     { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
   ]; // this is just placeholder for contactlist
 
-export default function ContactList() {
+export default function ContactList({ setSelectedContactId }) 
+// pass setSelectedContactId down to ContactRow
+ {
     const [contactData, setContactData] = useState(dummyContacts)
     // set up a useState invocation that hold mutable value in "contacts". dummyContacts is the default, which returns arrays with id/name/phone/email values. setContacts can update this
     useEffect(()=>{
@@ -41,7 +43,7 @@ export default function ContactList() {
             </tr> 
             {
                contactData.map((contact) => {
-                return <ContactRow key={contact.id} contact={contact} />;})
+                return <ContactRow setSelectedContactId={setSelectedContactId}  key={contact.id} contact={contact} />;})
                 //put contactData (default dummyContacts) through map, call ContactRow. for each 'contact' a ContactRow is returned. Contact (the item) = contact (the prop)
               }
           </tbody>
